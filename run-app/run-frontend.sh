@@ -12,7 +12,8 @@ sudo systemctl start nginx
 sudo systemctl enable nginx 
 
 # To open our website instead of CentOS website
-echo "user  nginx;
+cat <<-'default_config' > /etc/nginx/nginx.conf
+user  nginx;
 worker_processes  1;
 error_log  /var/log/nginx/error.log warn;
 pid        /var/run/nginx.pid;
@@ -41,7 +42,8 @@ http {
       root   /usr/share/nginx/html;
     }
   }
-}" > /etc/nginx/nginx.conf
+} 
+default_config
 
 # To restart nginx
 sudo systemctl reload nginx
